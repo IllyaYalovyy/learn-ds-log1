@@ -59,7 +59,8 @@ func (s *Store) Read(pos int64) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	data := make([]byte, bigEndian.Uint64(sizeBinary))
+	recordDataSize := bigEndian.Uint64(sizeBinary)
+	data := make([]byte, recordDataSize)
 	_, err = s.File.ReadAt(data, pos+recordLenSize)
 	if err != nil {
 		return nil, err
